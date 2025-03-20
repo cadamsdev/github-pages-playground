@@ -29,6 +29,7 @@ jobs:
       - name: Copy PR branch files
         run: |
           mkdir -p r/pr-${{ github.event.pull_request.number }}
+          git fetch origin ${{ github.event.pull_request.head.ref }}
           git checkout ${{ github.event.pull_request.head.ref }} -- .
           mv * r/pr-${{ github.event.pull_request.number }}/
           git add .
