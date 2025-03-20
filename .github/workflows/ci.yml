@@ -24,7 +24,7 @@ jobs:
         run: |
           git switch temp
           git fetch
-          git merge main
+          git merge origin/main
 
       - name: Copy PR branch files
         run: |
