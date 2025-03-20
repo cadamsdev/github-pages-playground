@@ -28,9 +28,9 @@ jobs:
 
       - name: Copy PR branch files
         run: |
-          mkdir -p r/${{ github.event.pull_request.number }}
+          mkdir -p r/pr-${{ github.event.pull_request.number }}
           git checkout ${{ github.event.pull_request.head.ref }} -- .
-          mv * r/${{ github.event.pull_request.number }}/
+          mv * r/pr-${{ github.event.pull_request.number }}/
           git add .
           git commit -m "Add PR #${{ github.event.pull_request.number }} files to temp branch"
 
@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build app
-        run: RUNWAY=r/${{ github.event.pull_request.number }} npm run build
+        run: RUNWAY=r/pr-${{ github.event.pull_request.number }} npm run build
 
       - name: Deploy changes
         run: npm run deploy
